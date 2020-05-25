@@ -1,0 +1,33 @@
+mixin css(x)
+  link(rel="stylesheet" href=`vendor/${x}`)
+mixin js(x)
+  script(src=`vendor/${x}`)
+doctype html
+html
+  head
+    title Tilawah
+    meta(charset="utf-8")
+    meta(name="viewport" content="width=device-width, initial-scale=1")
+    +css("bootstrap.min.css")
+    style 
+      include:uglify-css:stylus index.stylus
+  body.bg-secondary.text-white
+    .vue
+      .navbar.fixed-top.bg-dark.navbar-dark.navbar-expand-md
+        .navbar-brand Tilawah
+        .navbar-toggler(data-toggle="collapse" data-target="#menu")
+          .navbar-toggler-icon
+        .collapse.navbar-collapse#menu
+          .navbar-nav
+            .nav-item: a.nav-link(href="https://instagram.com/kumpulan.apk") Aplikasi lainnya
+      .container
+        p Halaman terakhir
+        h1 {{ halaman }}
+      .navbar.fixed-bottom.bg-dark.navbar-dark
+        form.full(@submit.prevent="ubah")
+          input.form-control(placeholder="Halaman terakhir?" required type="tel" v-model="halaman_baru")
+    +js("jquery.min.js")
+    +js("bootstrap.min.js")
+    +js("vue.min.js")
+    script
+      include:uglify-js:coffee-script(bare=true) index.coffee
